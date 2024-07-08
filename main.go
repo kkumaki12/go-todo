@@ -14,6 +14,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/hello", helloHandler)
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/", fs)
 	http.ListenAndServe(":8080", nil)
 }
