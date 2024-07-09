@@ -22,6 +22,17 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
+func deleteHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	_, err := db.Exec("DELETE FROM todos WHERE id = ?", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("static/index.html")
 	if err != nil {

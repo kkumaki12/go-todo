@@ -20,5 +20,6 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/new", newHandler)
 	http.HandleFunc("/create", createHandler)
+	http.HandleFunc("/delete", deleteHandler)
 	http.ListenAndServe(":8080", nil)
 }
