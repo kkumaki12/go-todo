@@ -17,8 +17,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	initDb()
-	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/", fs)
+	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/new", newHandler)
 	http.HandleFunc("/create", createHandler)
 	http.ListenAndServe(":8080", nil)
