@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"text/template"
 	"time"
@@ -28,9 +29,20 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	todos := []Todo{
-		{ID: 1, Content: "Write a blog", CreatedAt: time.Now()},
-		{ID: 2, Content: "Take a walk", CreatedAt: time.Now()},
+	rows, err := db.Query("SELECT id, content, created_at FROM todos")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	var todos []Todo
+	for rows.Next() {
+		var todo Todo
+		err := rows.Scan(&todo.ID, &todo.Content, &todo.CreatedAt)
+		if err != nil {
+			log.Fatal(err)
+		}
+		todos = append(todos, todo)
 	}
 
 	tmpl.Execute(w, todos)
