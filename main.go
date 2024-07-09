@@ -19,5 +19,6 @@ func main() {
 	initDb()
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
+	http.HandleFunc("/new", newHandler)
 	http.ListenAndServe(":8080", nil)
 }
