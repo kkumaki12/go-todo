@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">TODO List</h1>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Content</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .}}
+          <tr>
+            <td>{{.ID}}</td>
+            <td>{{.Content}}</td>
+            <td>{{.CreatedAt}}</td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+      <a href="/new" class="btn btn-primary">Add New TODO</a>
+    </div>
+  </body>
+</html>
